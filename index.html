@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1e3a8a">
+<title>SGI Gestão à Vista — Energy Systen</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js';document.head.appendChild(s);"></script>
+<style>
+  :root{--azul:#1e3a8a;--azul2:#2563eb;--azul-claro:#dbeafe;--azul-esc:#172554;--cinza:#f1f5f9;--cinza2:#e2e8f0;--texto:#0f172a;--muted:#64748b;--verde:#16a34a;--amarelo:#d97706;--vermelho:#dc2626;--sombra:0 2px 12px rgba(30,58,138,.10);--raio:14px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--cinza);color:var(--texto);line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  header{background:linear-gradient(135deg,var(--azul-esc),var(--azul2));color:#fff;padding:22px 20px 26px}
+  .head-top{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .logo-box{background:#fff;border-radius:12px;padding:8px 12px;display:flex;align-items:center;justify-content:center;min-height:64px;min-width:64px}
+  .logo-box img{max-height:56px;max-width:180px;display:block}
+  .logo-box .fallback{color:var(--azul);font-weight:800;font-size:15px;letter-spacing:1px}
+  .head-titles h1{font-size:26px;font-weight:800;letter-spacing:.5px}
+  .head-titles p{opacity:.9;font-size:14px;margin-top:2px}
+  .head-meta{margin-left:auto;text-align:right;font-size:13px;opacity:.95}
+  .isos{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .iso{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600}
+  nav{background:var(--azul);position:sticky;top:0;z-index:30;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .nav-in{max-width:1200px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:0 12px}
+  .tab{color:#cdd9f5;background:none;border:none;padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
+  .tab:hover{color:#fff}
+  .tab.active{color:#fff;border-bottom-color:#fff}
+  main{max-width:1200px;margin:0 auto;padding:22px 16px 60px}
+  .searchbar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+  .searchbar input{flex:1;min-width:220px;padding:12px 16px;border:1px solid var(--cinza2);border-radius:10px;font-size:15px;background:#fff}
+  .searchbar input:focus{outline:2px solid var(--azul2);border-color:var(--azul2)}
+  .btn{background:var(--azul2);color:#fff;border:none;padding:12px 18px;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px}
+  .btn:hover{background:var(--azul)}
+  .btn.ghost{background:#fff;color:var(--azul);border:1px solid var(--cinza2)}
+  .btn.ghost:hover{background:var(--azul-claro)}
+  h2.sec{font-size:15px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:26px 0 12px;font-weight:700}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .stat{background:#fff;border-radius:var(--raio);box-shadow:var(--sombra);padding:18px;border-top:4px solid var(--azul2)}
+  .stat.g{border-top-color:var(--verde)}.stat.y{border-top-color:var(--amarelo)}.stat.r{border-top-color:var(--vermelho)}
+  .stat .num{font-size:34px;font-weight:800;color:var(--azul)}
+  .stat.g .num{color:var(--verde)}.stat.y .num{color:var(--amarelo)}.stat.r .num{color:var(--vermelho)}
+  .stat .lbl{font-size:13px;color:var(--muted);margin-top:2px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .card{background:#fff;border-radius:var(--raio);box-shadow:var(--sombra);padding:16px;cursor:pointer;border:1px solid var(--cinza2);transition:.15s;display:flex;flex-direction:column;gap:8px}
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(30,58,138,.18);border-color:var(--azul2)}
+  .card .ico{font-size:26px}
+  .card .tit{font-weight:700;font-size:15px;color:var(--azul-esc)}
+  .card .sub{font-size:12.5px;color:var(--muted);flex:1}
+  .card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+  .pill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--azul-claro);color:var(--azul)}
+  .pill.g{background:#dcfce7;color:var(--verde)}.pill.y{background:#fef3c7;color:var(--amarelo)}.pill.r{background:#fee2e2;color:var(--vermelho)}
+  .count-badge{font-size:12px;color:var(--muted)}
+  .list-item{background:#fff;border-radius:10px;box-shadow:var(--sombra);padding:12px 14px;display:flex;align-items:center;gap:12px;border:1px solid var(--cinza2)}
+  .list-item .ico{font-size:20px}
+  .list-item .info{flex:1;min-width:0}
+  .list-item .info .n{font-weight:600;font-size:14px}
+  .list-item .info .d{font-size:12px;color:var(--muted)}
+  .list-item .acts{display:flex;gap:6px}
+  .mini{background:var(--azul-claro);color:var(--azul);border:none;padding:7px 10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
+  .mini:hover{background:var(--azul2);color:#fff}
+  .col{display:flex;flex-direction:column;gap:8px}
+  .subhead{font-weight:700;color:var(--azul);margin:16px 0 4px;font-size:14px;display:flex;align-items:center;gap:8px}
+  .subhead .tag{background:var(--azul);color:#fff;font-size:11px;padding:2px 8px;border-radius:12px}
+  .empty{color:var(--muted);font-size:14px;padding:14px;background:#fff;border-radius:10px;border:1px dashed var(--cinza2)}
+  .notice{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:12px 16px;border-radius:10px;font-size:13.5px;margin-bottom:18px;display:flex;gap:10px}
+  .overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+  .overlay.on{display:flex}
+  .modal{background:#fff;border-radius:16px;max-width:520px;width:100%;max-height:88vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .modal .m-head{background:var(--azul);color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+  .modal .m-head h3{font-size:17px}
+  .modal .x{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:8px;font-size:18px;cursor:pointer}
+  .modal .m-body{padding:20px}
+  #qrbox{display:flex;justify-content:center;margin:8px 0 14px}
+  #qrbox canvas,#qrbox img{border:8px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.15);border-radius:6px}
+  .qr-url{font-size:12px;word-break:break-all;background:var(--cinza);padding:10px;border-radius:8px;color:var(--muted);margin-bottom:12px}
+  footer{background:var(--azul-esc);color:#cbd5e1;text-align:center;padding:26px 16px;font-size:13px}
+  footer strong{color:#fff}
+  footer .logo-box{display:inline-flex;margin-bottom:10px}
+  #printArea{display:none}
+  @media print{body *{visibility:hidden}#printArea,#printArea *{visibility:visible}#printArea{display:block;position:absolute;left:0;top:0;width:100%}.qr-print-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:10px}.qr-print-card{border:2px solid #1e3a8a;border-radius:12px;padding:14px;text-align:center;page-break-inside:avoid}.qr-print-card h4{color:#1e3a8a;font-size:15px;margin-bottom:4px}.qr-print-card .cat{font-size:11px;color:#555;margin-bottom:8px}.qr-print-card canvas,.qr-print-card img{margin:0 auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="head-top">
+    <div class="logo-box"><img src="logo.png" alt="Energy Systen" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" style="display:none">ENERGY&nbsp;SYSTEN</span></div>
+    <div class="head-titles"><h1>SGI GESTÃO À VISTA</h1><p>Portal de Documentos · Sistema de Gestão Integrada · SST / Meio Ambiente / Qualidade</p></div>
+    <div class="head-meta">Atualizado em: <strong id="dataAtual"></strong><br>Resp. SGI: <strong>Milton Roberto</strong><div class="isos"><span class="iso">ISO 9001</span><span class="iso">ISO 14001</span><span class="iso">ISO 45001</span></div></div>
+  </div>
+</header>
+<nav><div class="nav-in" id="tabs">
+  <button class="tab active" data-view="visao">🏠 Visão Geral</button>
+  <button class="tab" data-view="sst">🦺 SST</button>
+  <button class="tab" data-view="ma">🌱 Meio Ambiente</button>
+  <button class="tab" data-view="iso">📊 ISOs / SGQ</button>
+  <button class="tab" data-view="emerg">🚨 Emergência</button>
+  <button class="tab" data-view="equipes">👷 Equipes</button>
+  <button class="tab" data-view="pesada">🚛 Frota Pesada</button>
+  <button class="tab" data-view="leve">🚗 Frota Leve</button>
+  <button class="tab" data-view="qr">🔲 QR Codes</button>
+</div></nav>
+<main>
+  <div class="searchbar"><input id="busca" type="text" placeholder="🔎 Buscar documento, equipe, placa ou modelo..."><button class="btn ghost" onclick="limparBusca()">Limpar</button></div>
+  <div id="conteudo"></div>
+</main>
+<footer>
+  <div class="logo-box"><img src="logo.png" alt="Energy Systen" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" style="display:none">ENERGY&nbsp;SYSTEN</span></div>
+  <div><strong>SGI Gestão à Vista</strong> — Portal de Documentos Energy Systen</div>
+  <div style="margin-top:4px">Disponibilizado para fiscalização, auditoria e consulta técnica · SST / MA / Qualidade</div>
+  <div style="margin-top:6px">Contato SGI: <strong>miltonrobertoac@outlook.com</strong></div>
+</footer>
+<div class="overlay" id="overlay" onclick="if(event.target===this)fecharModal()"><div class="modal">
+  <div class="m-head"><h3 id="mTitulo">Documento</h3><button class="x" onclick="fecharModal()">✕</button></div>
+  <div class="m-body"><div id="mLista"></div><div id="qrbox"></div><div class="qr-url" id="mUrl"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><a id="mAbrir" class="btn" target="_blank">📂 Abrir no GitHub</a><button class="btn ghost" onclick="imprimirQRUnico()">🖨️ Imprimir QR</button></div>
+  </div>
+</div></div>
+<div id="printArea"></div>
+<script>
+const BASE="https://gestao-a-vista-energysysten.github.io/sgi-documentos/";
+const REPO="https://github.com/gestao-a-vista-energysysten/sgi-documentos/tree/main/";
+const CATEGORIAS=[
+  {id:"01-PGR",grupo:"sst",ico:"📋",tit:"PGR",sub:"Programa de Gerenciamento de Riscos"},
+  {id:"02-PCMSO",grupo:"sst",ico:"🩺",tit:"PCMSO",sub:"Controle Médico de Saúde Ocupacional"},
+  {id:"03-PAE",grupo:"emerg",ico:"🚨",tit:"PAE",sub:"Plano de Atendimento a Emergência"},
+  {id:"04-FDS",grupo:"sst",ico:"🧪",tit:"FDS",sub:"Ficha de Dados de Segurança"},
+  {id:"05-POP",grupo:"iso",ico:"📑",tit:"POP",sub:"Procedimentos Operacionais Padrão"},
+  {id:"06-AEP",grupo:"sst",ico:"🧍",tit:"AEP",sub:"Análise Ergonômica Preliminar"},
+  {id:"07-APR",grupo:"sst",ico:"⚠️",tit:"APR",sub:"Análise Preliminar de Risco"},
+  {id:"08-PGRS",grupo:"ma",ico:"♻️",tit:"PGRS",sub:"Gerenciamento de Resíduos Sólidos"},
+  {id:"09-Politica-SGI",grupo:"iso",ico:"📜",tit:"Política e Compromissos SGI",sub:"Política Integrada de Gestão"},
+  {id:"10-Certificacoes",grupo:"iso",ico:"🏅",tit:"Certificações",sub:"Certificados ISO e habilitações"},
+  {id:"11-Laudos-EPI-Equipes",grupo:"sst",ico:"🧤",tit:"Laudos de EPIs",sub:"Laudos de EPIs das Equipes"}
+];
+// === REGISTRE SEUS DOCUMENTOS AQUI ===
+// {cat:"01-PGR", nome:"PGR 2026", arquivo:"pgr-2026.pdf", validade:"2027-01-31", status:"vigente"},
+const DOCUMENTOS=[];
+const EQUIPES=["EQUIPE LINHA VIVA 01 CASTANHAL - PA", "EQUIPE LINHA MORTA GOIÂNIA - GO", "SPCS 01", "COMISSIONAMENTO 01", "OBRA ELETROMECÂNICA 01", "MANUTENÇÃO CIVIL 01", "OBRA CIVIL 01", "EQUIPE LINHA VIVA 02 BELÉM - PA", "EQUIPE LINHA MORTA URUAÇU - GO", "SPCS 02", "OBRA ELETROMECÂNICA 02", "MANUTENÇÃO CIVIL 02", "OBRA CIVIL 02", "EQUIPE LINHA VIVA 03 MARABÁ - PARA", "EQUIPE LINHA MORTA LUZIÂNIA - GO", "SPCS 03", "OBRA ELETROMECÂNICA 03", "MANUTENÇÃO CIVIL 03", "OBRA CIVIL 03", "EQUIPE LINHA VIVA 04 BELÉM/CASTANHAL - PA", "EQUIPE LINHA MORTA MONTAGEM DISJUNTOR - GO", "SPCS 04", "OBRA ELETROMECÂNICA 04", "MANUTENÇÃO CIVIL 04", "OBRA CIVIL 04", "EQUIPE LINHA VIVA ALAGOAS", "TRATAMENTO DE ÓLEO", "OBRA ELETROMECÂNICA 05", "OBRA CIVIL 05", "EQUIPE LINHA VIVA RIO GRANDE DO SUL", "EQUIPE LINHA VIVA GOIÂNIA - GO", "EQUIPE LINHA VIVA ITINERANTE - GO", "EQUIPE LINHA VIVA URUAÇU - GO", "EQUIPE LINHA VIVA LUZIÂNIA - GO"];
+const CAMINHOES=[{"placa": "GZV2031", "tipo": "CAMINHÃO BAÚ", "marca": "N/A", "modelo": "N/A"}, {"placa": "PQK0758", "tipo": "CAMINHÃO MUNCK", "marca": "G-VETEC", "modelo": "16200"}, {"placa": "PRP6811", "tipo": "CAMINHÃO MUNCK", "marca": "RODOMAQ", "modelo": "GHR 14.000"}, {"placa": "PRP7751", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "TECMARQUES", "modelo": "RITZ 13L"}, {"placa": "PUY3A68", "tipo": "CAMINHÃO CARROCERIA", "marca": "N/A", "modelo": "N/A"}, {"placa": "RBL3E21", "tipo": "CAMINHÃO MUNCK", "marca": "MGM", "modelo": "35600"}, {"placa": "RBM5G01", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "TECMARQUES", "modelo": "TM040203 - CA 13M ODI"}, {"placa": "RBM5G21", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "TECMARQUES", "modelo": "TM040203 - CA 13M ODI"}, {"placa": "RBM5G31", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "TECMARQUES", "modelo": "TM040203 - CA 13M ODI"}, {"placa": "RBM6H11", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "TECMARQUES", "modelo": "TM010203 - CA 13M ODI"}, {"placa": "RCF0D71", "tipo": "CAMINHÃO MUNCK", "marca": "RODOMUNK", "modelo": "GRM 14.000"}, {"placa": "DWC0F04", "tipo": "CAMINHÃO MUNCK", "marca": "ARGOS", "modelo": "AGI 43.0-17.9/43"}, {"placa": "GBB6D27", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "IMAP", "modelo": "LI 13000 DGI"}, {"placa": "RCN5I73", "tipo": "CAMINHÃO MUNCK", "marca": "RODOMAQ", "modelo": "GHR 14.000"}, {"placa": "SDG7F34", "tipo": "CAMINÃO C/ CARROCERIA", "marca": "N/A", "modelo": "N/A"}, {"placa": "SDG8H74", "tipo": "CAMINÃO C/ CARROCERIA", "marca": "N/A", "modelo": "N/A"}, {"placa": "SWV8E07", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "GUITON", "modelo": "GT 20 LV"}, {"placa": "SWW9I36", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "GUITON", "modelo": "GT 20 LV"}, {"placa": "SWZ7A94", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "GUITON", "modelo": "GT 20 LV"}, {"placa": "NWF0A67", "tipo": "CAMINHÃO MUNCK", "marca": "RODOMAQ", "modelo": "GHR 14.000"}, {"placa": "PDC9F65", "tipo": "CAMINHÃO CESTO AÉREO SKY", "marca": "VERSALIFT", "modelo": "VO-460-MHI"}, {"placa": "HRS0527", "tipo": "CARRETA", "marca": "N/A", "modelo": "N/A"}, {"placa": "NSS0B27", "tipo": "TRAÇÃO CAMINHÃO TRATOR", "marca": "N/A", "modelo": "N/A"}, {"placa": "JAK8C59", "tipo": "CAMINHÃO MUNCK", "marca": "ING", "modelo": "45500"}, {"placa": "SVJ8H63", "tipo": "CAMINHÃO MUNCK", "marca": "PALFINGER", "modelo": "MD 45.007"}, {"placa": "JAX7J92", "tipo": "CARGA CAMINHÃO", "marca": "ARGOS", "modelo": "AGI 45 4H4M"}, {"placa": "SDN9A77", "tipo": "CARGA CAMINHAO", "marca": "", "modelo": "N/A"}];
+const VEICULOS=[{"placa": "FXF2D61", "modelo": "TOYOTA HILUX CDLOWM4FD"}, {"placa": "PRE6558", "modelo": "FORD RANGER XLSD4A22C"}, {"placa": "PRY6H34", "modelo": "STRADA HD WK CC E"}, {"placa": "PRY6H74", "modelo": "STRADA HD WK CC E"}, {"placa": "PRY6H94", "modelo": "STRADA HD WK CC E"}, {"placa": "PRY6I74", "modelo": "STRADA HD WK CC E"}, {"placa": "PRY6J24", "modelo": "STRADA HD WK CC E"}, {"placa": "PRY6J64", "modelo": "STRADA HD WK CC E"}, {"placa": "PRY7034", "modelo": "STRADA HD WK CC E"}, {"placa": "PRY7A14", "modelo": "STRADA HD WK CC E"}, {"placa": "QTS1J12", "modelo": "SIENA ATRATIV 1.4"}, {"placa": "QTS2A32", "modelo": "SIENA ATRATIV 1.4"}, {"placa": "QTS2A62", "modelo": "SIENA ATRATIV 1.4"}, {"placa": "QTS2A72", "modelo": "SIENA ATRATIV 1.4"}, {"placa": "QTS2A92", "modelo": "SIENA ATRATIV 1.4"}, {"placa": "RBN3D85", "modelo": "CHEVROLET/S10 LTZ DD4A"}, {"placa": "RBS6378", "modelo": "FIAT STRADA DH WK CD E"}, {"placa": "RBS6388", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS6418", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS9108", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS9118", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS9128", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS9138", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS9168", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS9278", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS9288", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBV5C93", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBV5D13", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBS6308", "modelo": "FIAT STRADA DH WK CC E"}, {"placa": "RBW4F74", "modelo": "FIAT STRADA DH WK CD E"}, {"placa": "RBS6398", "modelo": "FIAT STRADA DH WK CD E"}, {"placa": "RBW7I97", "modelo": "FIAT / STRADA ENDURANCE"}, {"placa": "RBX6C53", "modelo": "FIAT STRADA DH WK CD E"}, {"placa": "RBX6C63", "modelo": "FIAT STRADA DH WK CD E"}, {"placa": "RHI5J07", "modelo": "NISSAN VERSA V-DRIVE"}, {"placa": "SCA7G21", "modelo": "FIAT / STRADA FREEDON"}, {"placa": "SCC0G37", "modelo": "ONIX 10MT LT2 - PRATA"}, {"placa": "SCI3C00", "modelo": "MMC/L200 TRITON SPO GL"}, {"placa": "SCK2C00", "modelo": "MMC/L200 TRITON SPO GL"}, {"placa": "SCP6H23", "modelo": "VW/GOL MPI"}, {"placa": "SCP6H33", "modelo": "VW/GOL MPI"}, {"placa": "SCP6H43", "modelo": "VW/GOL MPI"}, {"placa": "SCQ2J47", "modelo": "ONIX 10MT LT2 - PRATA"}, {"placa": "SCQ4C47", "modelo": "ONIX 10MT LT2 - BRANCO"}, {"placa": "SCT3C00", "modelo": "MMC/L200 TRITON SPO GL"}, {"placa": "SCU2C00", "modelo": "MMC/L200 TRITON SPO GL"}, {"placa": "SCU3C00", "modelo": "MMC/L200 TRITON SPO GL"}, {"placa": "SCX8E94", "modelo": "VW/SAVEIRO CS RB MPI"}, {"placa": "SCY3C00", "modelo": "MMC/L200 TRITON SPO GL"}, {"placa": "SCY4A74", "modelo": "VW/SAVEIRO CS RB MPI"}, {"placa": "SDM6B86", "modelo": "FIAT / STRADA ENDURANCE"}, {"placa": "SDM6D66", "modelo": "FIAT / STRADA ENDURANCE"}, {"placa": "SHD1C92", "modelo": "NISSAN FRONTIER S MTX4"}, {"placa": "SHD1H70", "modelo": "NISSAN FRONTIER S MTX4"}, {"placa": "SVA6E20", "modelo": "FIAT / STRADA ENDURANCE"}, {"placa": "TGH4E52", "modelo": "FIAT / STRADA ENDURANCE"}, {"placa": "UBM1D57", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D58", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D59", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D60", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D61", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D62", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D63", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D64", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D65", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D66", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D67", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D68", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D69", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D70", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "UBM1D71", "modelo": "CHEVROLET/S10 WT DD4"}, {"placa": "TGB9H52", "modelo": "FIAT/STRADA ENDURAN CS13"}];
+document.getElementById("dataAtual").textContent=new Date().toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"});
+let viewAtual="visao",termo="";
+document.getElementById("tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));b.classList.add("active");viewAtual=b.dataset.view;render();});
+document.getElementById("busca").addEventListener("input",e=>{termo=e.target.value.trim().toLowerCase();render();});
+function limparBusca(){document.getElementById("busca").value="";termo="";render();}
+function docsDaCat(id){return DOCUMENTOS.filter(d=>d.cat===id);}
+function statusPill(s){if(s==="vigente")return '<span class="pill g">Vigente</span>';if(s==="revisao")return '<span class="pill y">Em revisão</span>';if(s==="vencido")return '<span class="pill r">Vencido</span>';return '<span class="pill">—</span>';}
+function match(t){return !termo||(t||"").toLowerCase().includes(termo);}
+function render(){const c=document.getElementById("conteudo");if(viewAtual==="visao")return c.innerHTML=viewVisao();if(viewAtual==="equipes")return c.innerHTML=viewEquipes();if(viewAtual==="pesada")return c.innerHTML=viewPesada();if(viewAtual==="leve")return c.innerHTML=viewLeve();if(viewAtual==="qr")return c.innerHTML=viewQR();return c.innerHTML=viewCategorias(viewAtual);}
+function cardCategoria(cat){const n=docsDaCat(cat.id).length;return '<div class="card" onclick="abrirCategoria(\''+cat.id+'\')"><div class="ico">'+cat.ico+'</div><div class="tit">'+cat.tit+'</div><div class="sub">'+cat.sub+'</div><div class="foot"><span class="count-badge">'+n+' doc'+(n!==1?'s':'')+'</span><span class="pill">Abrir ▸</span></div></div>';}
+function viewVisao(){
+  const total=DOCUMENTOS.length,vig=DOCUMENTOS.filter(d=>d.status==="vigente").length,rev=DOCUMENTOS.filter(d=>d.status==="revisao").length,venc=DOCUMENTOS.filter(d=>d.status==="vencido").length;
+  const cats=CATEGORIAS.filter(cat=>match(cat.tit+" "+cat.sub));
+  return '<div class="notice">⚠️ <div><strong>Como publicar:</strong> suba o PDF na pasta correta do repositório e registre-o na lista <code>DOCUMENTOS</code> do arquivo <code>index.html</code>. Enquanto não houver documentos, os contadores ficam em zero.</div></div><h2 class="sec">Visão Geral</h2><div class="stats"><div class="stat"><div class="num">'+total+'</div><div class="lbl">Documentos cadastrados</div></div><div class="stat g"><div class="num">'+vig+'</div><div class="lbl">Vigentes</div></div><div class="stat y"><div class="num">'+rev+'</div><div class="lbl">Em revisão</div></div><div class="stat r"><div class="num">'+venc+'</div><div class="lbl">Vencidos / A renovar</div></div></div><div class="stats" style="margin-top:14px"><div class="stat" style="border-top-color:#2563eb"><div class="num">'+EQUIPES.length+'</div><div class="lbl">👷 Equipes</div></div><div class="stat" style="border-top-color:#2563eb"><div class="num">'+CAMINHOES.length+'</div><div class="lbl">🚛 Frota Pesada</div></div><div class="stat" style="border-top-color:#2563eb"><div class="num">'+VEICULOS.length+'</div><div class="lbl">🚗 Frota Leve</div></div></div><h2 class="sec">Categorias de Documentos</h2><div class="grid">'+cats.map(cardCategoria).join("")+'</div>';
+}
+function viewCategorias(g){const nomes={sst:"Segurança do Trabalho (SST)",ma:"Meio Ambiente",iso:"ISOs / SGQ",emerg:"Emergência"};const cats=CATEGORIAS.filter(c=>c.grupo===g&&match(c.tit+" "+c.sub));return '<h2 class="sec">'+(nomes[g]||"")+'</h2><div class="grid">'+(cats.length?cats.map(cardCategoria).join(""):'<div class="empty">Nenhuma categoria encontrada.</div>')+'</div>';}
+function viewEquipes(){const l=EQUIPES.filter(e=>match(e));return '<div class="notice">🧤 <div>Ensaios técnicos, laudos e laudos de EPIs por equipe. Pastas: <code>11-Laudos-EPI-Equipes</code> e <code>12-Ensaios-Laudos-Equipes</code>.</div></div><h2 class="sec">Equipes ('+l.length+')</h2><div class="col">'+(l.length?l.map(e=>itemUnidade(e,"👷","12-Ensaios-Laudos-Equipes")).join(""):'<div class="empty">Nenhuma equipe encontrada.</div>')+'</div>';}
+function viewPesada(){
+  const cesto=CAMINHOES.filter(c=>/CESTO/i.test(c.tipo)),munck=CAMINHOES.filter(c=>/MUNCK|GUINDAUTO/i.test(c.tipo)),outros=CAMINHOES.filter(c=>!/CESTO|MUNCK|GUINDAUTO/i.test(c.tipo));
+  const f=a=>a.filter(c=>match(c.placa+" "+c.tipo+" "+c.marca+" "+c.modelo));
+  function bloco(t,a){const l=f(a);if(!l.length)return "";return '<div class="subhead"><span class="tag">'+l.length+'</span> '+t+'</div><div class="col">'+l.map(c=>itemVeiculo(c,"🏗️","13-Frota-Pesada")).join("")+'</div>';}
+  return '<div class="notice">🚛 <div>Documentos de veículos pesados: CRLV, laudos de guindauto/cesto aéreo (NR-11/NR-12), ART, ensaios. Pasta: <code>13-Frota-Pesada</code>.</div></div><h2 class="sec">Frota Pesada ('+CAMINHOES.length+')</h2>'+bloco("Caminhões Guindauto / Munck",munck)+bloco("Caminhões Cesto Aéreo (Sky)",cesto)+bloco("Outros (carroceria, baú, carreta, tração)",outros);
+}
+function viewLeve(){const l=VEICULOS.filter(v=>match(v.placa+" "+v.modelo));return '<div class="notice">🚗 <div>Documentos de veículos leves: CRLV, seguro, vistorias. Pasta: <code>14-Frota-Leve</code>.</div></div><h2 class="sec">Frota Leve ('+l.length+')</h2><div class="col">'+(l.length?l.map(v=>itemVeiculo({placa:v.placa,tipo:v.modelo,marca:"",modelo:""},"🚗","14-Frota-Leve")).join(""):'<div class="empty">Nenhum veículo encontrado.</div>')+'</div>';}
+function itemUnidade(nome,ico,pasta){const url=REPO+pasta;return '<div class="list-item"><div class="ico">'+ico+'</div><div class="info"><div class="n">'+nome+'</div><div class="d">Ensaios técnicos · Laudos · EPIs</div></div><div class="acts"><button class="mini" onclick=\'abrirQR('+JSON.stringify(nome)+',"Equipe",'+JSON.stringify(url)+')\'>🔲 QR</button><a class="mini" href="'+url+'" target="_blank">📂 Pasta</a></div></div>';}
+function itemVeiculo(c,ico,pasta){const url=REPO+pasta;const desc=[c.tipo,c.marca,c.modelo].filter(x=>x&&x!=="N/A").join(" · ");return '<div class="list-item"><div class="ico">'+ico+'</div><div class="info"><div class="n">'+c.placa+'</div><div class="d">'+(desc||"—")+'</div></div><div class="acts"><button class="mini" onclick=\'abrirQR('+JSON.stringify(c.placa)+','+JSON.stringify(desc)+','+JSON.stringify(url)+')\'>🔲 QR</button><a class="mini" href="'+url+'" target="_blank">📂 Pasta</a></div></div>';}
+function abrirCategoria(id){
+  const cat=CATEGORIAS.find(c=>c.id===id),docs=docsDaCat(id),url=REPO+id;
+  document.getElementById("mTitulo").textContent=cat.ico+" "+cat.tit;
+  let html='<p style="color:var(--muted);margin-bottom:10px">'+cat.sub+'</p>';
+  if(docs.length){html+=docs.map(d=>{const link=BASE+id+"/"+d.arquivo;return '<div class="list-item" style="margin-bottom:8px"><div class="ico">📄</div><div class="info"><div class="n">'+d.nome+'</div><div class="d">'+(d.validade?("Validade: "+fmt(d.validade)+" · "):"")+statusPill(d.status)+'</div></div><div class="acts"><button class="mini" onclick=\'abrirQR('+JSON.stringify(d.nome)+','+JSON.stringify(cat.tit)+','+JSON.stringify(link)+')\'>🔲</button><a class="mini" href="'+link+'" target="_blank">Abrir</a></div></div>';}).join("");}
+  else{html+='<div class="empty">Nenhum documento publicado nesta categoria ainda.<br>Suba o PDF na pasta <code>'+id+'</code> e registre na lista <code>DOCUMENTOS</code>.</div>';}
+  document.getElementById("mLista").innerHTML=html;
+  document.getElementById("qrbox").innerHTML="";
+  document.getElementById("mUrl").textContent=url;
+  const ab=document.getElementById("mAbrir");ab.href=url;ab.textContent="📂 Abrir pasta no GitHub";
+  gerarQR(url);document.getElementById("overlay").classList.add("on");
+}
+function abrirQR(nome,cat,url){document.getElementById("mTitulo").textContent="🔲 "+nome;document.getElementById("mLista").innerHTML='<p style="color:var(--muted);margin-bottom:6px">'+cat+'</p>';document.getElementById("qrbox").innerHTML="";document.getElementById("mUrl").textContent=url;const ab=document.getElementById("mAbrir");ab.href=url;ab.textContent="📂 Abrir no GitHub";gerarQR(url);document.getElementById("overlay").classList.add("on");}
+function gerarQR(t){const b=document.getElementById("qrbox");b.innerHTML="";if(typeof QRCode==="undefined"){b.innerHTML='<div style="color:#64748b;font-size:13px;text-align:center">Carregando gerador de QR... recarregue a página se não aparecer.</div>';return;}new QRCode(b,{text:t,width:200,height:200,colorDark:"#1e3a8a",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});}
+function fecharModal(){document.getElementById("overlay").classList.remove("on");}
+function fmt(d){try{return new Date(d+"T00:00").toLocaleDateString("pt-BR")}catch(e){return d}}
+function imprimirQRUnico(){const url=document.getElementById("mUrl").textContent,tit=document.getElementById("mTitulo").textContent.replace("🔲 ","");const area=document.getElementById("printArea");area.innerHTML='<div class="qr-print-grid"><div class="qr-print-card"><h4>'+tit+'</h4><div class="cat">Escaneie para acessar</div><div id="pq"></div></div></div>';new QRCode(document.getElementById("pq"),{text:url,width:220,height:220,colorDark:"#1e3a8a",colorLight:"#fff"});setTimeout(()=>window.print(),300);}
+function viewQR(){
+  if(!DOCUMENTOS.length){return '<div class="notice">🔲 <div>Assim que você registrar documentos na lista <code>DOCUMENTOS</code>, eles aparecem aqui como cartões com QR Code prontos para imprimir e colar nas frentes de trabalho.</div></div><div class="empty">Nenhum documento publicado ainda para gerar QR Codes.</div>';}
+  setTimeout(()=>{DOCUMENTOS.forEach((d,i)=>{const link=BASE+d.cat+"/"+d.arquivo,el=document.getElementById("qrg"+i);if(el){el.innerHTML="";new QRCode(el,{text:link,width:150,height:150,colorDark:"#1e3a8a",colorLight:"#fff"});}});},100);
+  return '<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><button class="btn" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button></div><div class="grid">'+DOCUMENTOS.map((d,i)=>{const cat=CATEGORIAS.find(c=>c.id===d.cat);return '<div class="card" style="text-align:center;align-items:center"><div class="tit">'+d.nome+'</div><div class="sub">'+(cat?cat.tit:d.cat)+'</div><div id="qrg'+i+'"></div>'+statusPill(d.status)+'</div>';}).join("")+'</div>';
+}
+render();
+</script>
+</body>
+</html>
