@@ -13,8 +13,8 @@
   a{color:inherit;text-decoration:none}
   header{background:linear-gradient(135deg,var(--azul-esc),var(--azul2));color:#fff;padding:22px 20px 26px}
   .head-top{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  .logo-box{background:#fff;border-radius:12px;padding:3px 6px;display:flex;align-items:center;justify-content:center;min-height:88px;min-width:64px}
-  .logo-box img{max-height:82px;max-width:240px;display:block}
+  .logo-box{background:#fff;border-radius:12px;padding:2px 6px;display:flex;align-items:center;justify-content:center;min-height:92px;min-width:64px}
+  .logo-box img{height:88px;width:auto;max-width:300px;object-fit:contain;display:block}
   .logo-box .fallback{color:var(--azul);font-weight:800;font-size:15px;letter-spacing:1px}
   .head-titles h1{font-size:26px;font-weight:800;letter-spacing:.5px}
   .head-titles p{opacity:.9;font-size:14px;margin-top:2px}
@@ -185,6 +185,3 @@ function qrItems(){return CATEGORIAS.map(c=>({key:c.id,nome:c.tit,sub:c.sub})).c
 function imprimirPainelQR(){const items=qrItems();const area=document.getElementById("printArea");area.innerHTML='<div class="qr-print-grid">'+items.map((it,i)=>'<div class="qr-print-card"><h4>'+it.nome+'</h4><div class="cat">Escaneie para consultar os documentos</div><div id="pp'+i+'"></div></div>').join("")+'</div>';items.forEach((it,i)=>{new QRCode(document.getElementById("pp"+i),{text:BASE+"#"+it.key,width:150,height:150,colorDark:"#1e3a8a",colorLight:"#fff"});});setTimeout(()=>window.print(),400);}
 function viewQR(){const items=qrItems();setTimeout(()=>{items.forEach((it,i)=>{const el=document.getElementById("qrg"+i);if(el){el.innerHTML="";new QRCode(el,{text:BASE+"#"+it.key,width:150,height:150,colorDark:"#1e3a8a",colorLight:"#fff"});}});},100);return '<div class="notice">🔲 <div>QR Codes por categoria — imprima e coloque nos quadros de Gestão à Vista das bases e canteiros. Ao escanear, o portal abre já na categoria com os documentos para consulta.</div></div><div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><button class="btn" onclick="imprimirPainelQR()">🖨️ Imprimir / Salvar PDF</button></div><div class="grid">'+items.map((it,i)=>'<div class="card" style="text-align:center;align-items:center"><div class="tit">'+it.nome+'</div><div class="sub">'+it.sub+'</div><div id="qrg'+i+'"></div></div>').join("")+'</div>';}
 render();carregarArvore();
-</script>
-</body>
-</html>
